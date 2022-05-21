@@ -1,13 +1,13 @@
 package com.example.serenakd.roundup.model;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
+
+import java.util.List;
 
 @ToString
 @Getter
-@Setter
-public class Amount {
-    private String currency;
-    private int minorUnits;
+public class SavingsGoalsResponse {
+
+    private List<SavingsGoals> savingsGoalList;
 }

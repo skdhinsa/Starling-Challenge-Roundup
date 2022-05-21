@@ -1,26 +1,30 @@
 package com.example.serenakd.roundup.controller;
 
+import com.example.serenakd.roundup.model.Account;
+import com.example.serenakd.roundup.service.Impl.AccountServiceImpl;
+import com.example.serenakd.roundup.service.Impl.RoundUpServiceImpl;
+import com.example.serenakd.roundup.service.Impl.TransactionsBetweenServiceImpl;
 import com.example.serenakd.roundup.service.TransactionsBetweenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class roundUpController {
 
     @Autowired
-    TransactionsBetweenService transactionsBetweenService;
+    RoundUpServiceImpl roundUpService;
 
     /**
      * @return Create a savings item in savings goal list
      */
     @GetMapping("/roundup")
     @ResponseBody
-    public ResponseEntity<String> postRoundUp() {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        String response = "change to json response";
-        return new ResponseEntity<String>(response, httpHeaders, HttpStatus.OK);
+    public ResponseEntity<Integer> postRoundUp() throws Exception {
+        int response = roundUpService.putSweepAmountIntoSavingsGoal();
+        return new ResponseEntity<Integer>(response, HttpStatus.OK);
     }
 
 }

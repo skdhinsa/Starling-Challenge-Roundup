@@ -6,5 +6,7 @@ import com.example.serenakd.roundup.model.Transaction;
 import java.util.List;
 
 public interface RoundUpService {
-    int roundUp();
+    int roundUpTransactions() throws Exception;
+    int putSweepAmountIntoSavingsGoal() throws Exception;
+    String getSavingsGoalUid() ;
 }

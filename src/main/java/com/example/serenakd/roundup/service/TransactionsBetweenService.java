@@ -5,5 +5,5 @@ import com.example.serenakd.roundup.model.Account;
 import java.util.List;
 
 public interface TransactionsBetweenService {
-    List<Integer> callGetTransactions(AccountService accountService);
+    List<Integer> getTransactionsBetweenDates();
 }
