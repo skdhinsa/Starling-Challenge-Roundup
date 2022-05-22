@@ -1,6 +1,5 @@
 package com.example.serenakd.roundup.service.Impl;
 
-import com.example.serenakd.roundup.model.SavingsGoals;
 import com.example.serenakd.roundup.service.RoundUpService;
 import com.example.serenakd.roundup.util.RoundUpTotal;
 import org.slf4j.Logger;
@@ -14,8 +13,8 @@ import java.util.List;
 @Service
 public class RoundUpServiceImpl implements RoundUpService {
 
-    @Value("${bearerToken}")
-    private String bearerToken;
+//    @Value("${bearerToken}")
+//    private String bearerToken;
 
     private static final Logger logger = LoggerFactory.getLogger(RoundUpService.class);
 
@@ -36,7 +35,6 @@ public class RoundUpServiceImpl implements RoundUpService {
         String savingsGoalUid = getSavingsGoalUid();
         savingsGoalService.addToSavingsGoal(sweepingAmount, savingsGoalUid);
         return 0;
-
     }
 
     @Override
@@ -56,9 +54,11 @@ public class RoundUpServiceImpl implements RoundUpService {
         String savingsGoalUid;
         Boolean isRoundupGoalPresent = savingsGoalService.isGoalAlreadyPresent();
         if(!isRoundupGoalPresent){
+            logger.info("Creating new Savings Goal");
             savingsGoalUid = savingsGoalService.createNewSavingsGoal();
         }
         savingsGoalUid = savingsGoalService.getRoundUpSavingsGoalUid();
+        logger.info("Retrieving SavingsGoalUid");
         return savingsGoalUid;
     }
 
