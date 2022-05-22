@@ -8,17 +8,22 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping("api/v1")
 public class roundUpController {
 
+    private final RoundUpServiceImpl roundUpService;
+
     @Autowired
-    RoundUpServiceImpl roundUpService;
+    public roundUpController(RoundUpServiceImpl roundUpService){
+        this.roundUpService = roundUpService;
+    }
 
     /**
      * @return Create a savings item in savings goal list
      */
     @GetMapping("/roundup")
     @ResponseBody
-    public ResponseEntity<?> postRoundUp() throws Exception {
+    public ResponseEntity<?> getRoundUp() throws Exception {
         roundUpService.sweepAmountIntoSavingsGoal();
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,6 +1,5 @@
 package com.example.serenakd.roundup.service;
 
-import com.example.serenakd.roundup.model.Account;
 
 import java.util.List;
 

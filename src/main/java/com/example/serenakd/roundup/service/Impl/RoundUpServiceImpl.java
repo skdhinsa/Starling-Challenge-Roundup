@@ -2,48 +2,42 @@ package com.example.serenakd.roundup.service.Impl;
 
 import com.example.serenakd.roundup.service.RoundUpService;
 import com.example.serenakd.roundup.util.RoundUpTotal;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
+@Slf4j
 public class RoundUpServiceImpl implements RoundUpService {
 
-//    @Value("${bearerToken}")
-//    private String bearerToken;
+    private final TransactionsBetweenServiceImpl transactionsBetweenService;
 
-    private static final Logger logger = LoggerFactory.getLogger(RoundUpService.class);
+    private final SavingsGoalServiceImpl savingsGoalService;
 
-    @Autowired
-    private TransactionsBetweenServiceImpl transactionsBetweenService;
+    private final RoundUpTotal roundUpTotal;
 
     @Autowired
-    private SavingsGoalServiceImpl savingsGoalService;
+    public RoundUpServiceImpl(TransactionsBetweenServiceImpl transactionsBetweenService, SavingsGoalServiceImpl savingsGoalService, RoundUpTotal roundUpTotal) {
+        this.transactionsBetweenService = transactionsBetweenService;
+        this.savingsGoalService = savingsGoalService;
+        this.roundUpTotal = roundUpTotal;
+    }
 
-    @Autowired
-    private RoundUpTotal roundUpTotal;
     /**
      * @return
      */
     @Override
-    public int sweepAmountIntoSavingsGoal() throws Exception {
+    public void sweepAmountIntoSavingsGoal() throws Exception {
         int sweepingAmount = roundUpWeeklyTransactionsAmount();
-        String savingsGoalUid = getSavingsGoalUid();
-        savingsGoalService.addToSavingsGoal(savingsGoalUid, sweepingAmount);
-        return 0;
+        savingsGoalService.addToSavingsGoal(getSavingsGoalUid(), sweepingAmount);
     }
 
     @Override
     public int roundUpWeeklyTransactionsAmount() throws Exception {
         try{
-            List<Integer> weeklyTransactions = transactionsBetweenService.getTransactionsBetweenDates();
-            return roundUpTotal.calculate(weeklyTransactions);
+            return roundUpTotal.calculate(transactionsBetweenService.getTransactionsBetweenDates());
         } catch (Exception e) {
-            logger.error("Error: In round-up transaction ", e);
+            log.error("Error: In round-up transaction ", e);
             throw new Exception(e.getCause());
         }
 
@@ -51,15 +45,12 @@ public class RoundUpServiceImpl implements RoundUpService {
 
     @Override
     public String getSavingsGoalUid() {
-        String savingsGoalUid;
-        Boolean isRoundupGoalPresent = savingsGoalService.isGoalAlreadyPresent();
-        if(!isRoundupGoalPresent){
-            logger.info("Creating new Savings Goal");
-            savingsGoalUid = savingsGoalService.createNewSavingsGoal();
+        if(!savingsGoalService.isGoalAlreadyPresent()){
+            log.info("Creating new Savings Goal");
+            return savingsGoalService.createNewSavingsGoal();
         }
-        savingsGoalUid = savingsGoalService.getRoundUpSavingsGoalUid();
-        logger.info("Retrieving SavingsGoalUid");
-        return savingsGoalUid;
+        log.info("Retrieving SavingsGoalUid");
+        return savingsGoalService.getRoundUpSavingsGoalUid();
     }
 
 }
