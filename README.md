@@ -20,7 +20,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-## How to run the tests:
+## To run the tests:
 
 - Navigate to  **RoundupApplicationTests.java** class in test directory and run.
 - Or run following command in terminal:
