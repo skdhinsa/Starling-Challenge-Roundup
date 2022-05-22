@@ -24,16 +24,19 @@ public class RoundUpServiceImpl implements RoundUpService {
     }
 
     /**
-     * @return
+     * Sweep weekly round up amount into SavingsGoal
      */
     @Override
     public void sweepAmountIntoSavingsGoal() throws Exception {
-        int sweepingAmount = roundUpWeeklyTransactionsAmount();
-        savingsGoalService.addToSavingsGoal(getSavingsGoalUid(), sweepingAmount);
+        savingsGoalService.addToSavingsGoal(getSavingsGoalUid(), roundedUpWeeklyTransactionsAmount());
     }
 
+    /**
+     * Calculate the round up amount for weekly transactions.
+     * @return  rounded up amount to sweep for transaction in a week
+     */
     @Override
-    public int roundUpWeeklyTransactionsAmount() throws Exception {
+    public int roundedUpWeeklyTransactionsAmount() throws Exception {
         try{
             return roundUpTotal.calculate(transactionsBetweenService.getTransactionsBetweenDates());
         } catch (Exception e) {
@@ -43,6 +46,10 @@ public class RoundUpServiceImpl implements RoundUpService {
 
     }
 
+    /**
+     * Retrieve the savingsGoalUid - for newly created goal or existing
+     * @return  savingsGoalUid
+     */
     @Override
     public String getSavingsGoalUid() {
         if(!savingsGoalService.isGoalAlreadyPresent()){

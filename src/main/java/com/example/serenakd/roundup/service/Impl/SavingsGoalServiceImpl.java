@@ -38,11 +38,11 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
     }
 
     /**
-     * @return
+     * @return savingsGoalUid
      */
     @Override
     public String createNewSavingsGoal() {
-        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals", accountService.getAccountInfoAPI().accountUid());
+        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals", accountService.getAccounts().accountUid());
         createHTTPHeadersWithBody();
 
         Amount target = new Amount();
@@ -59,13 +59,15 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
     }
 
     /**
-     *
+     *  Take the given savingsGoalUid and sweep amount into it.
+     *  @param savingsGoalUid - the Uid for Round-up Savings Goal
+     *  @param sweepingAmount - amount to sweep into Savings Goal
      */
     @Override
 
     public void addToSavingsGoal(String savingsGoalUid, int sweepingAmount) {
         final String transferUid = UUID.randomUUID().toString();
-        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals/%s/add-money/%s", accountService.getAccountInfoAPI().accountUid(), savingsGoalUid,transferUid);
+        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals/%s/add-money/%s", accountService.getAccounts().accountUid(), savingsGoalUid,transferUid);
         createHTTPHeadersWithBody();
 
         Amount transfer = new Amount();
@@ -82,17 +84,21 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
     }
 
     /**
-     * @return
+     * @return savingsGoalList
      */
     @Override
     public List<SavingsGoals> getAllSavingsGoals() {
-        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals", accountService.getAccountInfoAPI().accountUid());
+        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals", accountService.getAccounts().accountUid());
         ResponseEntity<SavingsGoalsResponse> response = restTemplate.exchange(urlTemplate, HttpMethod.GET, createHttpHeaders(bearerToken, httpHeaders), SavingsGoalsResponse.class);
         log.info("Retrieving all savings goals");
         return Objects.requireNonNull(response.getBody()).savingsGoalList();
 
     }
 
+    /**
+     * Check if there already exists a 'Round-up' savings goal
+     * @return boolean
+     */
     @Override
     public boolean isGoalAlreadyPresent(){
         List<SavingsGoals> savingsGoals = getAllSavingsGoals();
@@ -106,6 +112,10 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
         return false;
     }
 
+    /**
+     * If there already exists a 'Round-up' savings goal, get the savingsGoalUid
+     * @return savingsGoalUid or null
+     */
     @Override
     public String getRoundUpSavingsGoalUid(){
         List<SavingsGoals> savingsGoals = getAllSavingsGoals();
