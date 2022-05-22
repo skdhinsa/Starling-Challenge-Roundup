@@ -19,7 +19,7 @@ public class roundUpController {
     @GetMapping("/roundup")
     @ResponseBody
     public ResponseEntity<?> postRoundUp() throws Exception {
-        roundUpService.putSweepAmountIntoSavingsGoal();
+        roundUpService.sweepAmountIntoSavingsGoal();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface SavingsGoalService {
     String createNewSavingsGoal();
-    HttpStatus addToSavingsGoal(int sweepingAmount, String savingsGoalUid);
+    HttpStatus addToSavingsGoal( String savingsGoalUid, int sweepingAmount);
     List<SavingsGoals> getAllSavingsGoals();
     boolean isGoalAlreadyPresent();
     String getRoundUpSavingsGoalUid();

@@ -54,7 +54,7 @@ public class TransactionsBetweenServiceImpl implements TransactionsBetweenServic
         restTemplate = new RestTemplate();
 
         ResponseEntity<TransactionResponse> response = restTemplate.exchange(urlTemplate, HttpMethod.GET, entity, TransactionResponse.class);
-        logger.info("Retrieved ist of transactions in given week");
+        logger.info("Retrieved list of transactions in given week");
         return Objects.requireNonNull(response.getBody()).getFeedItems().stream().map(t -> t.getAmount().getMinorUnits()).toList();
     }
 }

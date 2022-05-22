@@ -30,15 +30,15 @@ public class RoundUpServiceImpl implements RoundUpService {
      * @return
      */
     @Override
-    public int putSweepAmountIntoSavingsGoal() throws Exception {
-        int sweepingAmount = roundUpTransactions();
+    public int sweepAmountIntoSavingsGoal() throws Exception {
+        int sweepingAmount = roundUpWeeklyTransactionsAmount();
         String savingsGoalUid = getSavingsGoalUid();
-        savingsGoalService.addToSavingsGoal(sweepingAmount, savingsGoalUid);
+        savingsGoalService.addToSavingsGoal(savingsGoalUid, sweepingAmount);
         return 0;
     }
 
     @Override
-    public int roundUpTransactions() throws Exception {
+    public int roundUpWeeklyTransactionsAmount() throws Exception {
         try{
             List<Integer> weeklyTransactions = transactionsBetweenService.getTransactionsBetweenDates();
             return roundUpTotal.calculate(weeklyTransactions);
