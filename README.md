@@ -37,6 +37,7 @@ mvn test
 - A more secure way of storing the bearerToken or add it as a parameter for the /roundup API.
 - Further improvements can be made based on this application based on the questions on the requirements found below.
 - Error messages and exceptions inclusion
+- Inject the public API URLs in a better fashion - a different class
 
 ## Requirement Questions:
 #### On requirement to create a new savings goal: to create a new savings goal for every single round-up?
