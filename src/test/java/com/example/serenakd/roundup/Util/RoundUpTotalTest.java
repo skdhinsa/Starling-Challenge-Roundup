@@ -2,6 +2,7 @@ package com.example.serenakd.roundup.Util;
 
 import com.example.serenakd.roundup.util.RoundUpTotal;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,4 +30,15 @@ public class RoundUpTotalTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void shouldNotIncludeTransactionsDivisibleBy100InRoundUp() throws Exception {
+		List<Integer> transactions = new ArrayList<Integer>();
+		transactions.add(87);
+		transactions.add(435);
+		transactions.add(10000);
+
+		int expected = 78;
+		int actual = roundUpTotal.calculate(transactions);
+		assertEquals(expected, actual);
+	}
 }
