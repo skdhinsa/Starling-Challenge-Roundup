@@ -54,7 +54,7 @@ public class RoundUpServiceImpl implements RoundUpService {
     public String getSavingsGoalUid() {
         if(!savingsGoalService.isGoalAlreadyPresent()){
             log.info("Creating new Savings Goal");
-            return savingsGoalService.createNewSavingsGoal();
+            return savingsGoalService.createNewSavingsGoalUid();
         }
         log.info("Retrieving SavingsGoalUid");
         return savingsGoalService.getRoundUpSavingsGoalUid();
