@@ -18,10 +18,10 @@ import static com.example.serenakd.roundup.util.Utilities.createHttpHeaders;
 
 @Service
 @Slf4j
-public class TransactionsServiceImpl implements TransactionsBetweenService {
+public class TransactionsBetweenServiceImpl implements TransactionsBetweenService {
 
-    @Value("${bearerToken}")
-    private String bearerToken;
+//    @Value("${bearerToken}")
+//    private String bearerToken;
 
     private final RestTemplate restTemplate;
 
@@ -30,7 +30,7 @@ public class TransactionsServiceImpl implements TransactionsBetweenService {
     private final HttpHeaders httpHeaders  = new HttpHeaders();
 
     @Autowired
-    public TransactionsServiceImpl(RestTemplate restTemplate, AccountService accountService) {
+    public TransactionsBetweenServiceImpl(RestTemplate restTemplate, AccountService accountService) {
         this.restTemplate = restTemplate;
         this.accountService = accountService;
     }
@@ -47,14 +47,17 @@ public class TransactionsServiceImpl implements TransactionsBetweenService {
 
         ResponseEntity<TransactionResponse> response = restTemplate.exchange(urlTemplate, HttpMethod.GET,
                 createHttpHeaders(bearerToken, httpHeaders), TransactionResponse.class);
-        log.info("Retrieved list of transactions in given week");
-        return Objects.requireNonNull(response.getBody()).feedItems().stream().map(t -> t.amount().getMinorUnits()).toList();
+        log.info("Retrieved list of outgoing transactions in given week");
+        return response.getBody().feedItems().stream()
+                .filter(item -> item.direction.equals("OUT"))
+                .map(transaction -> transaction.amount().getMinorUnits())
+                .toList();
     }
 
 
     public record TransactionResponse(List<Transaction> feedItems) {
     }
 
-    public record Transaction(String feedItemUid, Amount amount, String updatedAt, String transactionTime) {
+    public record Transaction(String feedItemUid, Amount amount, String updatedAt, String transactionTime, String direction) {
     }
 }

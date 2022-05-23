@@ -17,7 +17,7 @@ public class RoundUpTotal {
     public int calculate(List<Integer> transactions)  {
         int sweepingAmount = 0;
         for (Integer transaction : transactions) {
-            if(transaction%100 != 0) {
+            if(transaction%100 != 0 && transaction >= 0) {
                 sweepingAmount += 100-(transaction%100);
             }
         }
