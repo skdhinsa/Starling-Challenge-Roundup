@@ -27,8 +27,8 @@ public class RoundUpServiceImpl implements RoundUpService {
      * Sweep weekly round up amount into SavingsGoal
      */
     @Override
-    public void sweepRoundedAmountIntoSavingsGoal(String accountUid) throws Exception {
-        savingsGoalService.addToSavingsGoal(accountUid, getSavingsGoalUid(), roundedUpWeeklyTransactionsAmount());
+    public void sweepRoundedAmountIntoSavingsGoal(String accountUid, String minTransactionTimestamp, String maxTransactionTimestamp) throws Exception {
+        savingsGoalService.addToSavingsGoal(accountUid, getSavingsGoalUid(), roundUpTransactionsForWeek(minTransactionTimestamp, maxTransactionTimestamp));
     }
 
     /**
@@ -36,9 +36,10 @@ public class RoundUpServiceImpl implements RoundUpService {
      * @return  rounded up amount to sweep for transaction in a week
      */
     @Override
-    public int roundedUpWeeklyTransactionsAmount() throws Exception {
+    public int roundUpTransactionsForWeek(String minTransactionTimestamp, String maxTransactionTimestamp) throws Exception {
         try{
-            return roundUpTotal.calculate(transactionsBetweenService.getTransactionsBetweenDates());
+            return roundUpTotal.calculate(
+                    transactionsBetweenService.getTransactionsBetweenDates(minTransactionTimestamp, maxTransactionTimestamp));
         } catch (Exception e) {
             log.error("Error: In round-up transaction ", e);
             throw new Exception(e.getCause());
