@@ -21,7 +21,7 @@ public class roundUpController {
     /**
      * @return Create a savings item in savings goal list
      */
-    @PutMapping("feed/account/{accountUid}/savings-goals/round-up")
+    @PutMapping("feed/account/{accountUid}/savings-goals/round-up/transactions-between")
     @ResponseBody
     public ResponseEntity<?> roundUp(@PathVariable("accountUid") String accountUid,
                                         @RequestParam("minTransactionTimestamp") String minTransactionTimestamp,
