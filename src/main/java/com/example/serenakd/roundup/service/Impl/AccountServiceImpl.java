@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.example.serenakd.roundup.util.Utilities.createHttpHeaders;
 
@@ -38,7 +39,9 @@ public class AccountServiceImpl implements AccountService {
         ResponseEntity<AccountResponse> response = restTemplate.exchange(GET_ACCOUNT_INFO_API, HttpMethod.GET,
                 createHttpHeaders(bearerToken, httpHeaders), AccountResponse.class);
         log.info("Retrieving account information");
-        return Objects.requireNonNull(response.getBody()).accounts().get(0);
+        return Objects.requireNonNull(response.getBody()).accounts().stream()
+                .filter(account -> account.accountType().equals("PRIMARY"))
+                .toList().get(0);
     }
 
 
