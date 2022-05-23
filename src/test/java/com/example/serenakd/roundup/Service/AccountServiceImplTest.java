@@ -33,7 +33,7 @@ public class AccountServiceImplTest {
     @InjectMocks
     private AccountServiceImpl accountService;
 
-    private final ObjectMapper mapper = new ObjectMapper();;
+    private final ObjectMapper mapper = new ObjectMapper();
     private final String file = "src/test/java/resources/JsonResponses/accountResponse.json";
     private AccountServiceImpl.AccountResponse responseBody;
 
