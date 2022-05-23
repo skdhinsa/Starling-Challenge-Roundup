@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static com.example.serenakd.roundup.util.Utilities.createHttpHeaders;
 
