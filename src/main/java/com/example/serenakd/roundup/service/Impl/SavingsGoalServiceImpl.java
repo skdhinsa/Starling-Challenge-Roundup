@@ -61,6 +61,7 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
 
     /**
      *  Take the given savingsGoalUid and sweep amount into it.
+     *  @param accountUid - the account to perform the Round-up
      *  @param savingsGoalUid - the Uid for Round-up Savings Goal
      *  @param sweepingAmount - amount to sweep into Savings Goal
      */
