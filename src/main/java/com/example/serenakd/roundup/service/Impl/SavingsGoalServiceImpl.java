@@ -65,10 +65,9 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
      *  @param sweepingAmount - amount to sweep into Savings Goal
      */
     @Override
-
-    public void addToSavingsGoal(String savingsGoalUid, int sweepingAmount) {
+    public void addToSavingsGoal(String accountUid, String savingsGoalUid, int sweepingAmount) {
         final String transferUid = UUID.randomUUID().toString();
-        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals/%s/add-money/%s", accountService.getAccounts().accountUid(), savingsGoalUid,transferUid);
+        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals/%s/add-money/%s", accountUid, savingsGoalUid,transferUid);
         createHTTPHeadersWithBody();
 
         Amount transfer = new Amount();

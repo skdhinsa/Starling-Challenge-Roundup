@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 
 @RestController
 @RequestMapping("api/v1")
@@ -21,10 +23,10 @@ public class roundUpController {
     /**
      * @return Create a savings item in savings goal list
      */
-    @GetMapping("/roundup")
+    @GetMapping("feed/account/{accountUid}/savings-goals/round-up")
     @ResponseBody
-    public ResponseEntity<?> getRoundUp() throws Exception {
-        roundUpService.sweepAmountIntoSavingsGoal();
+    public ResponseEntity<?> getRoundUp(@PathVariable("accountUid") String accountUid) throws Exception {
+        roundUpService.sweepAmountIntoSavingsGoal(accountUid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

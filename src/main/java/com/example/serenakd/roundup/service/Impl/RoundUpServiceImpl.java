@@ -27,8 +27,8 @@ public class RoundUpServiceImpl implements RoundUpService {
      * Sweep weekly round up amount into SavingsGoal
      */
     @Override
-    public void sweepAmountIntoSavingsGoal() throws Exception {
-        savingsGoalService.addToSavingsGoal(getSavingsGoalUid(), roundedUpWeeklyTransactionsAmount());
+    public void sweepAmountIntoSavingsGoal(String accountUid) throws Exception {
+        savingsGoalService.addToSavingsGoal(accountUid, getSavingsGoalUid(), roundedUpWeeklyTransactionsAmount());
     }
 
     /**
