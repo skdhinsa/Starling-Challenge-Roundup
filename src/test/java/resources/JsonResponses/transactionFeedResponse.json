@@ -1,0 +1,24 @@
+{
+  "feedItems": [
+    {
+      "feedItemUid": "44d7c89f-45d6-4cb2-afe8-ddba6b12da16",
+      "amount": {
+        "currency": "GBP",
+        "minorUnits": 10000
+      },
+      "direction": "IN",
+      "updatedAt": "2022-05-14T21:43:37.575Z",
+      "transactionTime": "2022-05-14T21:43:37.000Z"
+    },
+    {
+      "feedItemUid": "44d75e80-bf36-4d02-905a-6236513fd4be",
+      "amount": {
+        "currency": "GBP",
+        "minorUnits": 5988
+      },
+      "direction": "OUT",
+      "updatedAt": "2022-05-14T21:43:38.621Z",
+      "transactionTime": "2022-05-14T21:43:37.845Z"
+    }
+  ]
+}
