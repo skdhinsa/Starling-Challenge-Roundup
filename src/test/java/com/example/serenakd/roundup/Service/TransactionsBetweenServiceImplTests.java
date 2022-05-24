@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
-public class TransactionServiceImplTests {
+public class TransactionsBetweenServiceImplTests {
 
 	@Mock
 	private RestTemplate restTemplate;

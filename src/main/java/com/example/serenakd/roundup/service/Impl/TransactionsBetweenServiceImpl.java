@@ -20,9 +20,6 @@ import static com.example.serenakd.roundup.util.Utilities.createHttpHeaders;
 @Slf4j
 public class TransactionsBetweenServiceImpl implements TransactionsBetweenService {
 
-//    @Value("${bearerToken}")
-//    private String bearerToken;
-
     private final RestTemplate restTemplate;
 
     private final AccountService accountService;
