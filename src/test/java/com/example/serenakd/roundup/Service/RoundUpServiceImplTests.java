@@ -34,8 +34,6 @@ import static org.mockito.MockitoAnnotations.openMocks;
 public class RoundUpServiceImplTests {
 
 	@Mock
-	private AccountServiceImpl accountService;
-	@Mock
 	private SavingsGoalServiceImpl savingsGoalService;
 	@Mock
 	private TransactionsBetweenServiceImpl transactionsBetweenService;
@@ -50,26 +48,6 @@ public class RoundUpServiceImplTests {
 	public void setUp() throws IOException {
 		openMocks(this);
 		roundUpService = new RoundUpServiceImpl(transactionsBetweenService, savingsGoalService, roundUpTotal);
-
-		ObjectMapper mapper = new ObjectMapper();
-		String file = "src/test/java/resources/JsonResponses/accountResponse.json";
-		AccountServiceImpl.AccountResponse responseBody;
-
-		String jsonResponse = new String(Files.readAllBytes(Paths.get(file)));
-		responseBody = mapper.readValue(jsonResponse, new TypeReference<>() {});
-		ResponseEntity<AccountServiceImpl.AccountResponse> response =
-				new ResponseEntity<>(responseBody, HttpStatus.OK);
-		Mockito.when(restTemplate.exchange(
-						ArgumentMatchers.anyString(),
-						ArgumentMatchers.any(HttpMethod.class),
-						ArgumentMatchers.any(),
-						ArgumentMatchers.<Class<AccountServiceImpl.AccountResponse>>any()))
-				.thenReturn(response);
-
-		Account acctStub = new Account("d22353cd-0a99-4bc9-818d-0cebbd721f8d", "PRIMARY",
-				"ae58a8e1-f529-4bf8-b3ff-c600b044baec","GBP", "2022-05-10T14:05:32.462Z",
-				"Personal");
-		when(accountService.getAccounts()).thenReturn(acctStub);
 	}
 
 	@Test
