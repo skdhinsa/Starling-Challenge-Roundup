@@ -3,7 +3,7 @@
 ## API:
 * **PUT**: http://localhost:8080/api/v1/feed/account/{accountUid}/savings-goals/round-up/transactions-between
 
-Created a PUT endpoint to the round-up feature for transactions in a given week.
+Created a PUT endpoint for the 'round-up' feature for transactions in any given week.
 * Path parameter:
   - accountUid
 
