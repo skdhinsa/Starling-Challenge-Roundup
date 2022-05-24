@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,8 @@ public class TransactionsBetweenServiceImplTests {
 	private RestTemplate restTemplate;
 	@Mock
 	private AccountServiceImpl accountService;
+	@Mock
+	private Environment environment;
 	@InjectMocks
 	private TransactionsBetweenServiceImpl transactionsBetweenServiceImpl;
 
@@ -44,7 +47,7 @@ public class TransactionsBetweenServiceImplTests {
 	@Before
 	public void setUp() throws IOException {
 		openMocks(this);
-		transactionsBetweenServiceImpl = new TransactionsBetweenServiceImpl(restTemplate, accountService);
+		transactionsBetweenServiceImpl = new TransactionsBetweenServiceImpl(restTemplate, accountService, environment);
 		String jsonResponse = new String(Files.readAllBytes(Paths.get(file)));
 		responseBody = mapper.readValue(jsonResponse, new TypeReference<>() {});
 		ResponseEntity<TransactionsBetweenServiceImpl.TransactionResponse> response =

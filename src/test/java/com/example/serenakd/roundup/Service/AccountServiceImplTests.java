@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ public class AccountServiceImplTests {
 
     @Mock
     private RestTemplate restTemplate;
+    @Mock
+    private Environment environment;
     @InjectMocks
     private AccountServiceImpl accountService;
 
@@ -37,10 +40,11 @@ public class AccountServiceImplTests {
     private final String file = "src/test/java/resources/JsonResponses/accountResponse.json";
     private AccountServiceImpl.AccountResponse responseBody;
 
+
     @Before
     public void setUp() throws IOException {
         openMocks(this);
-        accountService = new AccountServiceImpl(restTemplate);
+        accountService = new AccountServiceImpl(restTemplate, environment);
 
         String jsonResponse = new String(Files.readAllBytes(Paths.get(file)));
         responseBody = mapper.readValue(jsonResponse, new TypeReference<>() {});

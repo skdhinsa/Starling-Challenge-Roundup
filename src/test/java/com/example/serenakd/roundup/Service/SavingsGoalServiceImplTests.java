@@ -17,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,8 @@ public class SavingsGoalServiceImplTests {
 	private AccountServiceImpl accountService;
 	@Mock
 	private RestTemplate restTemplate;
+	@Mock
+	private Environment environment;
 	@InjectMocks
 	private SavingsGoalServiceImpl savingsGoalService;
 	private SavingsGoalServiceImpl.SavingsGoalsResponse responseBody;
@@ -57,7 +60,7 @@ public class SavingsGoalServiceImplTests {
 				"Personal");
 		when(accountService.getAccounts()).thenReturn(acctStub);
 
-		savingsGoalService = new SavingsGoalServiceImpl(restTemplate, accountService);
+		savingsGoalService = new SavingsGoalServiceImpl(restTemplate, accountService, environment);
 		mapper = new ObjectMapper();
 	}
 
