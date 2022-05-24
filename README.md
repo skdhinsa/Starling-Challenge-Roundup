@@ -51,6 +51,7 @@ mvn test
 - Inject the public API URLs in a better fashion - either a different class, in application.properties, using URI component builder.
 - Validation for the dates passed in the request to ensure they are a week apart. 
 - Have OpenAPI Specification for this endpoint
+- Consider implementation of circuit breaker pattern - due to dependency on multiple external APIs (or microservices in the actual infrastructure)
 
 ## Requirement Questions:
 * On requirement to create a new savings goal: to create a new savings goal for every single round-up?
