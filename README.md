@@ -12,7 +12,9 @@ Created a PUT endpoint for the 'round-up' feature for transactions in any given 
     - Example : 2020-06-01T12:34:56.000Z
   - maxTransactionTimestamp
     - Example : 2020-07-01T12:34:56.000Z
- 
+
+Can use an API testing tool, Postman for instance, to make a request to the roundup endpoint.
+Can then use relevant savings-goal endpoints to see updates made.
 
 ## 1. Get an Access Token:
  - On the Starling Bank Developers Account, generate a new access token.
@@ -26,18 +28,17 @@ cd roundup
 mvn clean install
 ```
 
-
-## 3. To run the application:
- - Navigate to **RoundupApplication.java**.
- - Run the application within an IDE or using the terminal command:
+## 3. To run the application and tests:
+* To run the application:
+  - Navigate to **RoundupApplication.java**.
+  - Run the application within an IDE or using the terminal command:
 ```
 mvn spring-boot:run
 ```
 
-## To run the tests:
-
-- Navigate to  **RoundupApplicationTests.java** class in test directory and run.
-- Or run following command in terminal:
+* To run the tests:
+  - Navigate to  **RoundupApplicationTests.java** class in test directory and run.
+  - Or run following command in terminal:
 ```
 mvn test
 ```
@@ -46,12 +47,12 @@ mvn test
 - Dockerize the application
 - Add a database connection to hold the 'transactionUid' for everytime transaction in a given week are rounded up and swept into a Savings goal. To keep track of each sweep.
 - A more secure way of storing the bearerToken or add it as a parameter for the /roundup API.
-- Further improvements can be made based on this application based on the questions on the requirements found below.
-- Error messages and exceptions inclusion
+- Improve upon error handling and exceptions inclusion
 - Inject the public API URLs in a better fashion - either a different class, in application.properties, using URI component builder.
 - Validation for the dates passed in the request to ensure they are a week apart. 
 - Have OpenAPI Specification for this endpoint
 - Consider implementation of circuit breaker pattern - due to dependency on multiple external APIs (or microservices in the actual infrastructure)
+- The addition of integration tests.
 
 ## Requirement Questions:
 * On requirement to create a new savings goal: to create a new savings goal for every single round-up?
