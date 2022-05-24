@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AccountServiceImplTest {
+public class AccountServiceImplTests {
 
     @Mock
     private RestTemplate restTemplate;
