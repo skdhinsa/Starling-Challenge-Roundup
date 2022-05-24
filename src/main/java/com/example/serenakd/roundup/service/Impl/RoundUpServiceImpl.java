@@ -44,7 +44,6 @@ public class RoundUpServiceImpl implements RoundUpService {
             log.error("Error: In round-up transaction ", e);
             throw new Exception(e.getCause());
         }
-
     }
 
     /**
