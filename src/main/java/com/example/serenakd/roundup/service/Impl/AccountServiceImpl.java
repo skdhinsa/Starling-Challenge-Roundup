@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.serenakd.roundup.util.RestAPIs.GET_ACCOUNT_INFO_API;
 import static com.example.serenakd.roundup.util.Utilities.createHttpHeaders;
 
 @Service
@@ -39,7 +40,6 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public Account getAccounts(){
-        String GET_ACCOUNT_INFO_API = "https://api-sandbox.starlingbank.com/api/v2/accounts";
         ResponseEntity<AccountResponse> response =
                 restTemplate.exchange(GET_ACCOUNT_INFO_API, HttpMethod.GET, createHttpHeaders(getBearerToken(), httpHeaders),
                         AccountResponse.class);

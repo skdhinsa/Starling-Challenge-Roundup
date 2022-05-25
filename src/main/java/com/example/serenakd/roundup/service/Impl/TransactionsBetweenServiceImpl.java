@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.serenakd.roundup.util.RestAPIs.GET_TRANSACTIONS_BETWEEN_DATES_API;
 import static com.example.serenakd.roundup.util.Utilities.createHttpHeaders;
 
 @Service
@@ -42,7 +43,7 @@ public class TransactionsBetweenServiceImpl implements TransactionsBetweenServic
      */
     @Override
     public List<Integer> getTransactionsBetweenDates(String minTransactionTimestamp, String maxTransactionTimestamp){
-        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/feed/account/%s/category/%s/transactions-between?minTransactionTimestamp=%s&maxTransactionTimestamp=%s",
+        String urlTemplate = String.format(GET_TRANSACTIONS_BETWEEN_DATES_API,
                 accountService.getAccounts().accountUid(),
                 accountService.getAccounts().defaultCategory(),
                 minTransactionTimestamp,

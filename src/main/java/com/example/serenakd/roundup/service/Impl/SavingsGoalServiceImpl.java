@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import static com.example.serenakd.roundup.util.RestAPIs.*;
 import static com.example.serenakd.roundup.util.Utilities.createHttpHeaders;
 import static java.lang.String.format;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -46,7 +47,7 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
      */
     @Override
     public String createNewSavingsGoalUid() {
-        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals", accountService.getAccounts().accountUid());
+        String urlTemplate = String.format(PUT_SAVINGS_GOAL_API, accountService.getAccounts().accountUid());
         createHTTPHeadersWithBody();
 
         Amount target = new Amount();
@@ -71,7 +72,7 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
     @Override
     public void addToSavingsGoal(String accountUid, String savingsGoalUid, int sweepingAmount) {
         final String transferUid = UUID.randomUUID().toString();
-        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals/%s/add-money/%s", accountUid, savingsGoalUid,transferUid);
+        String urlTemplate = String.format(ADD_TO_SAVINGS_GOAL_API, accountUid, savingsGoalUid,transferUid);
         createHTTPHeadersWithBody();
 
         Amount transfer = new Amount();
@@ -92,7 +93,7 @@ public class SavingsGoalServiceImpl implements SavingsGoalService {
      */
     @Override
     public List<SavingsGoals> getAllSavingsGoals() {
-        String urlTemplate = String.format("https://api-sandbox.starlingbank.com/api/v2/account/%s/savings-goals", accountService.getAccounts().accountUid());
+        String urlTemplate = String.format(GET_ALL_SAVINGS_GOALS_API, accountService.getAccounts().accountUid());
         ResponseEntity<SavingsGoalsResponse> response = restTemplate.exchange(urlTemplate, HttpMethod.GET, createHttpHeaders(getBearerToken(), httpHeaders), SavingsGoalsResponse.class);
         log.info("Retrieving all savings goals");
         return Objects.requireNonNull(response.getBody()).savingsGoalList();
