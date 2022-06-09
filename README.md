@@ -52,27 +52,4 @@ mvn test
 - Consider implementation of circuit breaker pattern - due to dependency on multiple external APIs (or microservices in the actual infrastructure)
 - The addition of integration tests.
 
-## Requirement Questions:
-* On requirement to create a new savings goal: to create a new savings goal for every single round-up?
-  - Within this application a savings goal called "Round-up Savings" is created once only (if it doesn't exist) and then all "round-ups" will be sweeped into that account.
-
-
-* On requirement to create a new savings goal: is there a default amount for target minor units?
-  - In this application it is set to '10000', however, if the /roundup API is to create a savings goal, are there default values to input on behalf of the customer?
-
-
-* On account types that are eligible for 'weekly transaction round up":
-  - There appears to be 3 account types: [PRIMARY, ADDITIONAL, LOAN]. Does this feature only apply to 'PRIMARY' accounts? In this application, it has only considered PRIMARY accounts, as that is where it is presumed most spending would occur. However, this can be modified if other types included also.
-
-
-* On the spending category:
-  - Which categories for transactions are eligible for "round-up"?
-
-
-* On customer choosing which savings goal:
-  - The requirements say to create a new savings goal, (which implies this occurs everytime the API is called). However, is there an option to allow the customer to choose from current savings goal or to create a new savings goal? 
-
-
-* On the HTTP Method:
-  - Given that the requirements do not specify whether we are retrieving any information or performing an update. In this application it is a PUT endpoint, as we are updating a savings goal or creating one.
 
