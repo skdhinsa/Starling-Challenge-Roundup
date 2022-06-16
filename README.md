@@ -46,9 +46,8 @@ mvn test
 - Dockerize the application
 - Add a database connection to hold the 'transactionUid' for everytime transaction in a given week are rounded up and swept into a Savings goal. To keep track of each sweep.
 - Would likely include the bearerToken as part of the request to this endpoint - in 'Authorization' header
-- Improve upon error handling and exceptions inclusion
+- Improve upon error handling and exceptions inclusion - add exceptions for HTTP error codes
 - Validation for the dates passed in the request to ensure they are a week apart. 
-- Have OpenAPI Specification for this endpoint
 - Consider implementation of circuit breaker pattern - due to dependency on multiple external APIs (or microservices in the actual infrastructure)
 - The addition of integration tests.
 
