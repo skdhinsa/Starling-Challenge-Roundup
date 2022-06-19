@@ -16,11 +16,20 @@ Created a PUT endpoint for the 'round-up' feature for transactions in any given 
 Can use an API testing tool, Postman for instance, to make a request to the roundup endpoint.
 Can then use relevant savings-goal endpoints to see updates made.
 
-## 1. Get an Access Token:
+## 1. Get an Access Token
  - On the Starling Bank Developers Account, generate a new access token.
  - Replace the access token found in _"application.properties"_ called **bearerToken**
 
-## 2. Compile and Run the application:
+## 2. Compile and Run the application
+## To run in a Docker container
+Run the commands:
+```
+docker build -t roundup.jar .
+docker run -p port:8080 {image_name}
+```
+Example: "docker run -p 9090:8080 fdec3bc8718e"
+
+## To run locally
 Ensure to cd into roundup directory.
 Run _"mvn clean install"_ in the terminal.
 ```
@@ -41,4 +50,3 @@ mvn spring-boot:run
 ```
 mvn test
 ```
-
